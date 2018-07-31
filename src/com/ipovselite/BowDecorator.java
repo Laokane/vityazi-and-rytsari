@@ -10,7 +10,7 @@ public class BowDecorator extends Decorator {
 
     public Unit getUnit() {
         this.unit.addItem(new Bow());
-        this.unit.addItem(new Item());
+        this.unit.addItem(new Buff());
         if (unit instanceof Decorator) {
             return ((Decorator) unit).getUnit();
         }

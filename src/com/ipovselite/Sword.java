@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Created by User on 14.06.2016.
  */
-public class Sword extends Item {
+public class Sword extends Buff {
     public Sword() {
         attackBonus = new Random().nextInt(3) + 1;
         defendBonus = 0;

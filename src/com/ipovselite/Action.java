@@ -37,30 +37,15 @@ public class Action {
     }
 
     public void execute(Unit src, Unit target) {
-        boolean success = Randomizer.getResultByProbability(probability);
-        double multiplier = 1;
-        if (power.equals(ActionPower.MINI)) {
-           multiplier = 0.5;
-        } else if (power.equals(ActionPower.NORMAL)) {
-           multiplier = 1;
-        } else if (power.equals(ActionPower.SPECIAL)) {
-            multiplier = 2;
-        }
         String event = "--СОБЫТИЕ: ";
         if (baseType.equals(ActionType.ATTACK)) {
-            int attack = success || !power.equals(ActionPower.MINI) ? src.getCurrentMaxAttack() : src.getCurrentMinAttack();
-            attack *= multiplier;
-            attack += src.getTotalAttack();
+            int attack = src.getCurrentAttack();
             event += "Воин " + src.getName() + " нанес воину " + target.getName() + " " + attack + "ед. урона";
             event += "\n--СОБЫТИЕ: " + target.getName() + " отразил " + target.getDefense() + " eд.урона";
             target.damage(attack);
         } else if (baseType.equals(ActionType.DEFENSE)) {
             event += "Воин " + src.getName() + " защитил воина " + target.getName();
             target.setDefense(target.getDefense() + src.getTotalDefense());
-        } else if (baseType.equals(ActionType.STUN)) {
-            String not = success ? "" : "не ";
-            event += "Воин " + src.getName() + not + " оглушил воина " + target.getName();
-            target.setStunned(success);
         } else if (baseType.equals(ActionType.HEAL)) {
             event += "Воин " + src.getName() + " полечил воина " + target.getName();
             target.setHealth(target.getHealth() + 5);

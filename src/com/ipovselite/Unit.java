@@ -1,6 +1,5 @@
 package com.ipovselite;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +14,10 @@ public class Unit {
     protected int defense;
     protected int currentMinAttack;
     protected int currentMaxAttack;
-    protected Item firstItem;
-    protected Item secondItem;
+    protected int defaultAttack;
     protected boolean stunned;
     protected String type;
-    protected List<Item> items;
+    protected List<Buff> buffs;
     protected String name;
     protected Permission permission;
 
@@ -32,7 +30,7 @@ public class Unit {
     }
 
     public Unit() {
-        items = new ArrayList<Item>(2);
+        buffs = new ArrayList<Buff>(2);
         points = 5;
         defense = getTotalDefense();
         stunned = false;
@@ -61,14 +59,18 @@ public class Unit {
         this.defense = defense;
     }
 
-    public void addItem(Item item) {
-        if (items.size() < 2)
-            items.add(item);
+    public void addItem(Buff buff) {
+        if (buffs.size() < 2)
+            buffs.add(buff);
         restoreTemporary();
     }
 
     public int getCurrentMaxAttack() {
         return currentMaxAttack;
+    }
+
+    public int getCurrentAttack() {
+        return defaultAttack + buffs.stream().mapToInt(buff -> buff.attackBonus).sum();
     }
 
     public void setCurrentMaxAttack(int currentMaxAttack) {
@@ -164,8 +166,8 @@ public class Unit {
 
     public int getTotalDefense() {
         int totalDefense = 0;
-        for (int i = 0; i < items.size(); i++) {
-            totalDefense += items.get(i).getDefendBonus();
+        for (int i = 0; i < buffs.size(); i++) {
+            totalDefense += buffs.get(i).getDefendBonus();
         }
 
         return totalDefense;
@@ -173,8 +175,8 @@ public class Unit {
 
     public int getTotalAttack() {
         int totalAttack = 0;
-        for (int i = 0; i < items.size(); i++) {
-            totalAttack += items.get(i).getAttackBonus();
+        for (int i = 0; i < buffs.size(); i++) {
+            totalAttack += buffs.get(i).getAttackBonus();
         }
 
         return totalAttack;
@@ -198,7 +200,7 @@ public class Unit {
 
     public String toString() {
         String available = points == 0 || stunned || health == 0 ? "Недоступен": "Доступен";
-        String info = name + " (" + type + ")\nЗд.: " + health + " Эн.: " + points + "\nЛевая рука: " + items.get(0).getName() + " +" + items.get(0).getAttackBonus() + "/+" + items.get(0).getDefendBonus() + "\nПравая рука: " + items.get(1).getName() + " +" + items.get(1).getAttackBonus() + "/+" + items.get(1).getDefendBonus() + "\nМин. урон: "  + currentMinAttack + "\nMакс. урон: " + currentMaxAttack + "\n" + available;
+        String info = name + " (" + type + ")\nЗд.: " + health + " Эн.: " + points + "\nЛевая рука: " + buffs.get(0).getName() + " +" + buffs.get(0).getAttackBonus() + "/+" + buffs.get(0).getDefendBonus() + "\nПравая рука: " + buffs.get(1).getName() + " +" + buffs.get(1).getAttackBonus() + "/+" + buffs.get(1).getDefendBonus() + "\nМин. урон: "  + currentMinAttack + "\nMакс. урон: " + currentMaxAttack + "\n" + available;
 
         return info;
     }

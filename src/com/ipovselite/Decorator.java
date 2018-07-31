@@ -20,8 +20,8 @@ public class Decorator extends Unit {
         }
     }
 
-    public void addItem(Item item) {
-        this.unit.addItem(item);
+    public void addItem(Buff buff) {
+        this.unit.addItem(buff);
     }
 
     public Unit getUnit() {
