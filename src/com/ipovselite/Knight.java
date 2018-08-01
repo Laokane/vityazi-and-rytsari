@@ -6,9 +6,8 @@ package com.ipovselite;
 public class Knight extends Unit {
 
     public Knight() {
-        health = 30;
-        currentMinAttack = 1;
-        currentMaxAttack = 3;
+        health = 6;
+        defaultAttack = 5;
         type = "Рыцарь";
         permission = Permission.Knight;
     }

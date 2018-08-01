@@ -5,9 +5,8 @@ package com.ipovselite;
  */
 public class Magician extends Unit {
     public Magician() {
-        health = 20;
-        currentMinAttack = 2;
-        currentMaxAttack = 3;
+        health = 2;
+        defaultAttack = 1;
         type = "Маг";
         permission = Permission.Magician;
     }

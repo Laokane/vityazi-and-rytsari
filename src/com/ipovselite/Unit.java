@@ -12,8 +12,6 @@ public class Unit {
     protected int mana;
     protected int health;
     protected int defense;
-    protected int currentMinAttack;
-    protected int currentMaxAttack;
     protected int defaultAttack;
     protected boolean stunned;
     protected String type;
@@ -65,27 +63,8 @@ public class Unit {
         restoreTemporary();
     }
 
-    public int getCurrentMaxAttack() {
-        return currentMaxAttack;
+    public int getCurrentAttack() {return defaultAttack + buffs.stream().mapToInt(buff -> buff.attackBonus).sum();
     }
-
-    public int getCurrentAttack() {
-        return defaultAttack + buffs.stream().mapToInt(buff -> buff.attackBonus).sum();
-    }
-
-    public void setCurrentMaxAttack(int currentMaxAttack) {
-        this.currentMaxAttack = currentMaxAttack;
-    }
-
-    public int getCurrentMinAttack() {
-        return currentMinAttack;
-    }
-
-    public void setCurrentMinAttack(int currentMinAttack) {
-        this.currentMinAttack = currentMinAttack;
-    }
-
-
 
     public List<Action> getAvailableActions() {
         List<Action> allActions = ActionStore.getActionList();
@@ -200,7 +179,7 @@ public class Unit {
 
     public String toString() {
         String available = points == 0 || stunned || health == 0 ? "Недоступен": "Доступен";
-        String info = name + " (" + type + ")\nЗд.: " + health + " Эн.: " + points + "\nЛевая рука: " + buffs.get(0).getName() + " +" + buffs.get(0).getAttackBonus() + "/+" + buffs.get(0).getDefendBonus() + "\nПравая рука: " + buffs.get(1).getName() + " +" + buffs.get(1).getAttackBonus() + "/+" + buffs.get(1).getDefendBonus() + "\nМин. урон: "  + currentMinAttack + "\nMакс. урон: " + currentMaxAttack + "\n" + available;
+        String info = name + " (" + type + ")\nЗд.: " + health + " Эн.: " + points + "\n" + available;
 
         return info;
     }

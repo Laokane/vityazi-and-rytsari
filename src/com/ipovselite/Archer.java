@@ -6,8 +6,7 @@ package com.ipovselite;
 public class Archer extends Unit {
     public Archer() {
         health = 5;
-        currentMinAttack = 1;
-        currentMaxAttack = 4;
+        defaultAttack = 4;
         type = "Лучник";
         permission = Permission.Archer;
     }
