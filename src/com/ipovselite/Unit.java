@@ -34,19 +34,8 @@ public class Unit {
         stunned = false;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
     public boolean isStunned() {
         return stunned;
-    }
-
-    public void setStunned(boolean stunned) {
-        this.stunned = stunned;
     }
 
     public int getDefense() {
@@ -63,7 +52,7 @@ public class Unit {
         restoreTemporary();
     }
 
-    public int getCurrentAttack() {return defaultAttack + buffs.stream().mapToInt(buff -> buff.attackBonus).sum();
+    public int getCurrentAttack() {return defaultAttack + buffs.stream().mapToInt(Buff::getAttackBonus).sum();
     }
 
     public List<Action> getAvailableActions() {
@@ -107,10 +96,6 @@ public class Unit {
         return mana;
     }
 
-    public void setMana(int mana) {
-        this.mana = mana;
-    }
-
     public static Unit getUnit(UnitType type) {
         Unit unit = null;
         if (type.equals(UnitType.Knight)) {
@@ -150,15 +135,6 @@ public class Unit {
         }
 
         return totalDefense;
-    }
-
-    public int getTotalAttack() {
-        int totalAttack = 0;
-        for (int i = 0; i < buffs.size(); i++) {
-            totalAttack += buffs.get(i).getAttackBonus();
-        }
-
-        return totalAttack;
     }
 
     public boolean isAvailable() {
