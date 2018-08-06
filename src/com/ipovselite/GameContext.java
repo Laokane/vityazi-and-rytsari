@@ -136,8 +136,8 @@ public class GameContext {
                     if (action.getBaseType().equals(ActionType.ATTACK) || action.getBaseType().equals(ActionType.STUN)) {
                         targetId = ConsoleUtils.input(1, enemies.size(), "Выбери цель для атаки");
                         friends.get(id - 1).act(enemies.get(targetId - 1), action);
-                    } else if (action.getBaseType().equals(ActionType.DEFENSE) || action.getBaseType().equals(ActionType.HEAL)) {
-                        targetId = ConsoleUtils.input(1, friends.size(), "Выбери цель для помощи");
+                    } else if (action.getBaseType().equals(ActionType.HEAL)) {
+                        targetId = ConsoleUtils.input(1, friends.size(), "Выбери цель для исцеления");
                         friends.get(id - 1).act(friends.get(targetId - 1), action);
                     }
                     //check alive
@@ -208,16 +208,6 @@ public class GameContext {
             }
 
             Unit unit = Unit.getUnit(type);
-            //ConsoleUtils.print(unit.toString());
-            if (type.equals(UnitType.Knight)) {
-                Decorator decorator = new SwordDecorator(Decorator.getRandomDecorator(unit));
-                unit = decorator.getUnit();
-            } else if (type.equals(UnitType.Magician)) {
-                Decorator decorator = new StaffDecorator(new StaffDecorator(unit));
-                unit = decorator.getUnit();
-            } else if (type.equals(UnitType.Archer)) {
-                unit = new BowDecorator(unit).getUnit();
-            }
             //ConsoleUtils.print(unit.toString());
             unit.setName(Randomizer.getName());
             units.add(unit);

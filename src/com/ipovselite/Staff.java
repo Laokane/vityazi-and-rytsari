@@ -7,8 +7,8 @@ import java.util.Random;
  */
 public class Staff extends Buff {
     public Staff() {
-        attackBonus = new Random().nextInt(1) + 1;
-        defendBonus = new Random().nextInt(2);
+        attackBonus = 0;
+        healthBonus = 0;
         name = "Посох";
     }
 }

@@ -6,7 +6,7 @@ package com.ipovselite;
 public class Bow extends Buff {
     public Bow() {
         attackBonus = 3;
-        defendBonus = 0;
+        healthBonus = 0;
         name = "Лук";
     }
 }

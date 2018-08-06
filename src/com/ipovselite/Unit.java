@@ -11,7 +11,6 @@ public class Unit {
     protected int points;
     protected int mana;
     protected int health;
-    protected int defense;
     protected int defaultAttack;
     protected boolean stunned;
     protected String type;
@@ -30,20 +29,11 @@ public class Unit {
     public Unit() {
         buffs = new ArrayList<Buff>(2);
         points = 5;
-        defense = getTotalDefense();
         stunned = false;
     }
 
     public boolean isStunned() {
         return stunned;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public void setDefense(int defense) {
-        this.defense = defense;
     }
 
     public void addItem(Buff buff) {
@@ -110,13 +100,7 @@ public class Unit {
     }
 
     public void damage(int attack) {
-        int diff = defense - attack;
-        if (diff < 0) {
-            defense = 0;
-            health += diff;
-        } else {
-            defense -= attack;
-        }
+        health = health - attack;
 
         if (health < 0)
             health = 0;
@@ -124,17 +108,7 @@ public class Unit {
 
     public void restoreTemporary() {
         points = stunned ? 0 : 5;
-        defense = getTotalDefense();
         stunned = false;
-    }
-
-    public int getTotalDefense() {
-        int totalDefense = 0;
-        for (int i = 0; i < buffs.size(); i++) {
-            totalDefense += buffs.get(i).getDefendBonus();
-        }
-
-        return totalDefense;
     }
 
     public boolean isAvailable() {

@@ -8,7 +8,7 @@ import java.util.Random;
 public class Shield extends Buff {
     public Shield() {
         attackBonus = 0;
-        defendBonus = new Random().nextInt(3) + 1;
+        healthBonus = 0;
         name = "Шит";
     }
 }

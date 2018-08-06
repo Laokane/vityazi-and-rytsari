@@ -41,11 +41,10 @@ public class Action {
         if (baseType.equals(ActionType.ATTACK)) {
             int attack = src.getCurrentAttack();
             event += "Воин " + src.getName() + " нанес воину " + target.getName() + " " + attack + "ед. урона";
-            event += "\n--СОБЫТИЕ: " + target.getName() + " отразил " + target.getDefense() + " eд.урона";
             target.damage(attack);
-        } else if (baseType.equals(ActionType.DEFENSE)) {
-            event += "Воин " + src.getName() + " защитил воина " + target.getName();
-            target.setDefense(target.getDefense() + src.getTotalDefense());
+        //     } else if (baseType.equals(ActionType.DEFENSE)) {
+        //       event += "Воин " + src.getName() + " защитил воина " + target.getName();
+        //       target.setDefense(target.getDefense() + src.getTotalDefense());
         } else if (baseType.equals(ActionType.HEAL)) {
             event += "Воин " + src.getName() + " полечил воина " + target.getName();
             target.setHealth(target.getHealth() + 5);
@@ -59,8 +58,6 @@ public class Action {
         String powerStr = "";
         if (baseType.equals(ActionType.ATTACK)) {
             baseTypeStr = "Атака";
-        } else if (baseType.equals(ActionType.DEFENSE)) {
-            baseTypeStr = "Защита";
         } else if (baseType.equals(ActionType.HEAL)) {
             baseTypeStr = "Исцеление";
         } else {

@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class Buff {
     protected int attackBonus;
-    protected int defendBonus;
+    protected int healthBonus;
     protected String name = "пусто";
 
     public String getName() {
@@ -20,9 +20,5 @@ public class Buff {
 
     public int getAttackBonus() {
         return attackBonus;
-    }
-
-    public int getDefendBonus() {
-        return defendBonus;
     }
 }
